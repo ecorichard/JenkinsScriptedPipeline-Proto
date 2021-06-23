@@ -1,0 +1,1 @@
+# JenkinsScriptedPipeline-Proto
