@@ -7,7 +7,7 @@ node('kube') {
   stage('Say Hello') {
     echo "${G_TEST1}"
     G_TEST2 = "${G_TEST1}-${G_TEST2}"
-    G_TEST3 = ${G_TEST1}.blabla-${G_TEST2}
+    G_TEST3 = ${G_TEST1}-blabla-${G_TEST2}
   }
   
   stage('Say Hola') {
