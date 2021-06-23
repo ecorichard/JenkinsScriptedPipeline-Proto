@@ -10,7 +10,7 @@ node('kube') {
   
   stage('Say Hello') {
     sh """
-      AWSECR=${AWS_ACCOUNT}.dkr.ecr."${AWS_REGION}".amazonaws.com
+      AWSECR=${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
       echo ECR: \$AWSECR
     """
     echo "${G_TEST1}"
