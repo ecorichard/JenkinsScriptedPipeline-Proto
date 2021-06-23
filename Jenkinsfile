@@ -20,7 +20,7 @@ node('kube') {
       echo double-quotes-merge: "${G_TEST1} -- ${G_TEST2}"
       echo no-quotes: $G_TEST1 -- $G_TEST2
       echo no-quotes-wcurly: ${G_TEST1} -- ${G_TEST2}
-      echo G_TEST3: ${G_TEST3}
+      echo G_TEST3: "${G_TEST3}.blabla.${G_TEST2}"
     """
   }
   
