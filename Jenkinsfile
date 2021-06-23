@@ -13,12 +13,12 @@ node('kube') {
   }
   
   stage('Say Hi') {
-    sh '''
+    sh """
       echo double-quotes: "${G_TEST2}"
       echo double-quotes-merge: "${G_TEST1} -- ${G_TEST2}"
       echo no-quotes: $G_TEST1 -- $G_TEST2
       echo no-quotes-wcurly: ${G_TEST1} -- ${G_TEST2}
-    '''
+    """
   }
   
 }
