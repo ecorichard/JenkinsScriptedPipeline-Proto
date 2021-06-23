@@ -1,6 +1,6 @@
 node('kube') {
 
-  def G_TEST1 = "hello"
+  def G_TEST1 = "us-west-2"
   def G_TEST2 = "hola"
   def G_TEST3 = "${G_TEST1}:yupyup:${G_TEST2}"
   
