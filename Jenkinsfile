@@ -2,7 +2,7 @@ node('kube') {
 
   def G_TEST1 = "hello"
   def G_TEST2 = "hola"
-  def G_TEST3 = ""
+  def G_TEST3 = "${G_TEST1}:yupyup:${G_TEST2}"
   
   stage('Say Hello') {
     echo "${G_TEST1}"
@@ -22,7 +22,7 @@ node('kube') {
       echo no-quotes: $G_TEST1 -- $G_TEST2
       echo no-quotes-wcurly: ${G_TEST1} -- ${G_TEST2}
       echo G_TEST3: "${G_TEST3}:blabla/${G_TEST2}"
-      echo "localTEST: $localTEST"
+      echo "localTEST: /$localTEST"
     """
   }
   
