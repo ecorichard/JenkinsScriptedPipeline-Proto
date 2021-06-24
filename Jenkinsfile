@@ -59,12 +59,12 @@ node('kube') {
 
 def stashEnvVars() {
   sh '''
-    echo $env.ENV_AWS_ACCOUNT > envVars.txt
-    echo $env.ENV_AWS_REGION >> envVars.txt
-    echo $env.ENV_NAME >> envVars.txt
-    echo $env.ENV_VERSION >> envVars.txt
-    echo $env.ENV_NAMESPACE >> envVars.txt
-    echo $env.ENV_CONFIG >> envVars.txt
+    echo "ENV_AWS_ACCOUNT=$ENV_AWS_ACCOUNT" > envVars.txt
+    echo "ENV_AWS_REGION=$ENV_AWS_REGION" >> envVars.txt
+    echo "ENV_NAME=$ENV_NAME" >> envVars.txt
+    echo "ENV_VERSION=$ENV_VERSION" >> envVars.txt
+    echo "ENV_NAMESPACE=$ENV_NAMESPACE" >> envVars.txt
+    echo "ENV_CONFIG=$ENV_CONFIG" >> envVars.txt
   '''
   stash name: 'envVars', includes: 'envVars.txt'
 }
