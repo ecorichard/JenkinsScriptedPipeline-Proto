@@ -83,5 +83,9 @@ def loadStashToEnv() {
   unstash :	'envVars'
   sh '''
      export $(cat envVars.txt)
+     printenv | grep 'ENV_' | sort
+  '''
+  sh '''
+    printenv | grep 'ENV_' | sort
   '''
 }  
