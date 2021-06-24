@@ -45,15 +45,15 @@ node('kube') {
       echo "----test load------"
       printenv | grep 'ENV_' | sort
     '''
-    sh """
+    sh '''
       localTEST=${ENV_AWS_ACCOUNT}.blabla.${ENV_AWS_REGION}.test.com
       echo double-quotes: "${ENV_AWS_ACCOUNT}"
       echo double-quotes-merge: "${ENV_CONFIG} -- ${ENV_NAME}"
       echo no-quotes: $ENV_AWS_ACCOUNT -- $ENV_VERSION
       echo no-quotes-wcurly: ${ENV_VERSION} -- ${ENV_NAME}
-      echo G_TEST3: "${ENV_VERSION}:blabla/${ENV_CONFIG}"
+      echo G_TEST3: "${ENV_VERSION}:blabla/${ENV_NAMESPACE}"
       echo "localTEST: \$localTEST"
-    """
+    '''
   }
   
 }
