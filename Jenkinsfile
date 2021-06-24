@@ -81,6 +81,6 @@ def initEnvVars() {
 def loadStashToEnv() {
   unstash :	'envVars'
   sh '''
-    source envVars.txt
+     export $(cat envVars.txt)
   '''
 }  
