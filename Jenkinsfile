@@ -81,9 +81,6 @@ def initEnvVars() {
 
 def loadStashToEnv() {
   unstash :	'envVars'
-  #env.setProperty('ENV_AWS_ACCOUNT', sh(script:'grep ENV_AWS_ACCOUNT envVars.txt | awk -F= {'print $2'}', returnStdout: true).trim())
-  #env.setProperty('ENV_VERSION', sh(script:'grep ENV_VERSION envVars.txt | awk -F= {'print $2'}', returnStdout: true).trim())
-
   env.ENV_AWS_ACCOUNT = sh(script:'grep ENV_AWS_ACCOUNT envVars.txt | awk -F= {'print $2'}', returnStdout: true).trim()
   env.ENV_VERSION = sh(script:'grep ENV_AWS_ACCOUNT envVars.txt | awk -F= {'print $2'}', returnStdout: true).trim()
 
