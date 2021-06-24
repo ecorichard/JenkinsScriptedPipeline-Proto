@@ -1,4 +1,5 @@
 node('kube') {
+  initEnvVars()
 
   def G_TEST1 = "us-west-2"
   def G_TEST2 = "hola"
@@ -8,12 +9,6 @@ node('kube') {
   def NAMESPACE = "la-la-la-cluster"
   def K8_CONTEXT = "arn:aws:eks:${AWS_REGION}:${AWS_ACCOUNT}:cluster/${NAMESPACE}"
   
-  stage('init-1') {
-    initEnvVars()
-    sh '''
-      printenv
-    '''
-  }
   stage('Say Hello') {
     sh """
       AWSECR=${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
@@ -30,13 +25,7 @@ node('kube') {
 }
 
 node('kube') {
-  
-  stage('init-2') {
-    initEnvVars()
-    sh '''
-      printenv
-    '''
-  }
+  initEnvVars()
   
   stage('Say Hi') {
     sh """
@@ -53,12 +42,10 @@ node('kube') {
 }
 
 def initEnvVars() {
-    sh '''
-        export ENV_AWS_ACCOUNT='1234567890'
-        export ENV_AWS_REGION='us-west-2'
-        export ENV_NAME='xyz-abc-job'
-        export ENV_VERSION=''
-        export ENV_NAMESPACE='hello-cluster-world'
-        export ENV_CONFIG='hello-you'
-    '''
+  env.setProperty(ENV_AWS_ACCOUNT, '1234567890')
+  env.setProperty(ENV_AWS_REGION, 'us-west-2')
+  env.setProperty(ENV_NAME, 'xyz-abc-job')
+  env.setProperty(ENV_VERSION, '')
+  env.setProperty(ENV_NAMESPACE, 'hello-cluster-world')
+  env.setProperty(ENV_CONFIG, 'hello-you')
 }
