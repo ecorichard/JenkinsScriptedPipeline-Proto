@@ -10,7 +10,9 @@ node('kube') {
   
   stage('init-1') {
     initEnvVars()
-    echo $env
+    sh '''
+      printenv
+    '''
   }
   stage('Say Hello') {
     sh """
@@ -31,7 +33,9 @@ node('kube') {
   
   stage('init-2') {
     initEnvVars()
-    echo $env
+    sh '''
+      printenv
+    '''
   }
   
   stage('Say Hi') {
@@ -49,10 +53,12 @@ node('kube') {
 }
 
 def initEnvVars() {
-    ENV_AWS_ACCOUNT = '1234567890'
-    ENV_AWS_REGION = 'us-west-2'
-    ENV_NAME = 'xyz-abc-job'
-    ENV_VERSION = ''
-    ENV_NAMESPACE = 'hello-cluster-world'
-    ENV_CONFIG = 'hello-you'
+    sh '''
+        export ENV_AWS_ACCOUNT='1234567890'
+        export ENV_AWS_REGION='us-west-2'
+        export ENV_NAME='xyz-abc-job'
+        export ENV_VERSION=''
+        export ENV_NAMESPACE='hello-cluster-world'
+        export ENV_CONFIG='hello-you'
+    '''
 }
