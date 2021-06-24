@@ -81,7 +81,8 @@ def initEnvVars() {
 def loadStashToEnv() {
   unstash :	'envVars'
   new File("envVars.txt").eachLine{line->
-  if(line.contains('=') {
-    env.setProperty(line.split('=')[0], line.split('=')[1])
+    if(line.contains('=') {
+      env.setProperty(line.split('=')[0], line.split('=')[1])
+    }
   }
 }  
