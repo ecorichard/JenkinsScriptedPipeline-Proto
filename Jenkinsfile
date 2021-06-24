@@ -11,7 +11,7 @@ node('kube') {
   
   stage('Say Hello') {
     sh '''
-      printenv
+      printenv | sort
     '''
     sh """
       AWSECR=${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
@@ -32,7 +32,7 @@ node('kube') {
   
   stage('print env 2') {
     sh '''
-      printenv
+      printenv | sort
     '''
   }
   stage('Say Hi') {
