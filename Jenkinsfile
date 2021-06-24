@@ -42,10 +42,10 @@ node('kube') {
 }
 
 def initEnvVars() {
-  env.setProperty(ENV_AWS_ACCOUNT, '1234567890')
-  env.setProperty(ENV_AWS_REGION, 'us-west-2')
-  env.setProperty(ENV_NAME, 'xyz-abc-job')
-  env.setProperty(ENV_VERSION, '')
-  env.setProperty(ENV_NAMESPACE, 'hello-cluster-world')
-  env.setProperty(ENV_CONFIG, 'hello-you')
+  env.setProperty('ENV_AWS_ACCOUNT', '1234567890')
+  env.setProperty('ENV_AWS_REGION', 'us-west-2')
+  env.setProperty('ENV_NAME', 'xyz-abc-job')
+  env.setProperty('ENV_VERSION', '')
+  env.setProperty('ENV_NAMESPACE', 'hello-cluster-world')
+  env.setProperty('ENV_CONFIG', 'hello-you')
 }
