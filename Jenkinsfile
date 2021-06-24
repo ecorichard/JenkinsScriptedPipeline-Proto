@@ -10,6 +10,9 @@ node('kube') {
   def K8_CONTEXT = "arn:aws:eks:${AWS_REGION}:${AWS_ACCOUNT}:cluster/${NAMESPACE}"
   
   stage('Say Hello') {
+    sh '''
+      printenv
+    '''
     sh """
       AWSECR=${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
       echo ECR: \$AWSECR
@@ -27,6 +30,11 @@ node('kube') {
 node('kube') {
   initEnvVars()
   
+  stage('print env 2') {
+    sh '''
+      printenv
+    '''
+  }
   stage('Say Hi') {
     sh """
       localTEST=${G_TEST3}.blabla.${G_TEST2}.test.com
