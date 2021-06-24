@@ -24,6 +24,7 @@ node('kube') {
   
   stage('Say Hola') {
     echo "${G_TEST2}"
+    stashEnvVars()
   }
 }
 
@@ -35,7 +36,14 @@ node('kube') {
       printenv | sort
     '''
   }
+  stage('test load stash') {
+    loadStashToEnv()
+  }
   stage('Say Hi') {
+    sh '''
+      echo "----test load------"
+      printenv | grep 'ENV_' | sort
+    '''
     sh """
       localTEST=${G_TEST3}.blabla.${G_TEST2}.test.com
       echo double-quotes: "${G_TEST2}"
@@ -49,6 +57,18 @@ node('kube') {
   
 }
 
+def stashEnvVars() {
+  sh '''
+    echo $env.ENV_AWS_ACCOUNT > envVars.txt
+    echo $env.ENV_AWS_REGION >> envVars.txt
+    echo $env.ENV_NAME >> envVars.txt
+    echo $env.ENV_VERSION >> envVars.txt
+    echo $env.ENV_NAMESPACE >> envVars.txt
+    echo $env.ENV_CONFIG >> envVars.txt
+  '''
+  stash name: 'envVars', includes: 'envVars.txt'
+}
+
 def initEnvVars() {
   env.setProperty('ENV_AWS_ACCOUNT', '1234567890')
   env.setProperty('ENV_AWS_REGION', 'us-west-2')
@@ -56,4 +76,13 @@ def initEnvVars() {
   env.setProperty('ENV_VERSION', '')
   env.setProperty('ENV_NAMESPACE', 'hello-cluster-world')
   env.setProperty('ENV_CONFIG', 'hello-you')
+}
+
+def loadStashToEnv() {
+  unstash :	'envVars'
+  new File("envVars.txt").eachLine{line->
+  if(line.contains('=') {
+    env.setProperty(line.split('=')[0], line.split('=')[1])
+  }
+}  
 }
