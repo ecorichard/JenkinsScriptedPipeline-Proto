@@ -46,12 +46,12 @@ node('kube') {
       printenv | grep 'ENV_' | sort
     '''
     sh """
-      localTEST=${G_TEST3}.blabla.${G_TEST2}.test.com
-      echo double-quotes: "${G_TEST2}"
-      echo double-quotes-merge: "${G_TEST1} -- ${G_TEST2}"
+      localTEST=${ENV_AWS_ACCOUNT}.blabla.${ENV_AWS_REGION}.test.com
+      echo double-quotes: "${ENV_AWS_ACCOUNT}"
+      echo double-quotes-merge: "${ENV_CONFIG} -- ${ENV_NAME}"
       echo no-quotes: $G_TEST1 -- $G_TEST2
-      echo no-quotes-wcurly: ${G_TEST1} -- ${G_TEST2}
-      echo G_TEST3: "${G_TEST3}:blabla/${G_TEST2}"
+      echo no-quotes-wcurly: ${ENV_VERSION} -- ${ENV_NAME}
+      echo G_TEST3: "${ENV_VERSION}:blabla/${ENV_CONFIG}"
       echo "localTEST: \$localTEST"
     """
   }
@@ -82,13 +82,10 @@ def initEnvVars() {
 def loadStashToEnv() {
   unstash :	'envVars'
   env.setProperty('ENV_AWS_ACCOUNT', sh(script:'grep ENV_AWS_ACCOUNT envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
+  env.setProperty('ENV_AWS_REGION', sh(script:'grep ENV_AWS_REGION envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
+  env.setProperty('ENV_NAME', sh(script:'grep ENV_NAME envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
   env.setProperty('ENV_VERSION', sh(script:'grep ENV_VERSION envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
+  env.setProperty('ENV_NAMESPACE', sh(script:'grep ENV_NAMESPACE envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
+  env.setProperty('ENV_CONFIG', sh(script:'grep ENV_CONFIG envVars.txt | awk -F= {\'print $2\'}', returnStdout: true).trim())
 
-  sh '''
-     export $(cat envVars.txt)
-     printenv | grep 'ENV_' | sort
-  '''
-  sh '''
-    printenv | grep 'ENV_' | sort
-  '''
 }  
