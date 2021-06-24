@@ -85,4 +85,3 @@ def loadStashToEnv() {
     env.setProperty(line.split('=')[0], line.split('=')[1])
   }
 }  
-}
