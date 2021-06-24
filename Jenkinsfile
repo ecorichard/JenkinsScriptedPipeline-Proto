@@ -8,6 +8,10 @@ node('kube') {
   def NAMESPACE = "la-la-la-cluster"
   def K8_CONTEXT = "arn:aws:eks:${AWS_REGION}:${AWS_ACCOUNT}:cluster/${NAMESPACE}"
   
+  stage('init-1') {
+    initEnvVars()
+    echo $env
+  }
   stage('Say Hello') {
     sh """
       AWSECR=${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
@@ -20,6 +24,14 @@ node('kube') {
   
   stage('Say Hola') {
     echo "${G_TEST2}"
+  }
+}
+
+node('kube') {
+  
+  stage('init-2') {
+    initEnvVars()
+    echo $env
   }
   
   stage('Say Hi') {
@@ -34,4 +46,13 @@ node('kube') {
     """
   }
   
+}
+
+def initEnvVars() {
+    ENV_AWS_ACCOUNT = '1234567890'
+    ENV_AWS_REGION = 'us-west-2'
+    ENV_NAME = 'xyz-abc-job'
+    ENV_VERSION = ''
+    ENV_NAMESPACE = 'hello-cluster-world'
+    ENV_CONFIG = 'hello-you'
 }
