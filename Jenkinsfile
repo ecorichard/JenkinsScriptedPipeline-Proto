@@ -11,7 +11,7 @@ node('kube') {
   
   stage('Say Hello') {
     env.setProperty('ENV_VERSION', sh(
-      scripts: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD)', 
+      scripts: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD))', 
       returnStdout: true).trim()
     )    
     sh '''
