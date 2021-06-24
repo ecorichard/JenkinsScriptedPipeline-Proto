@@ -20,6 +20,7 @@ node('kube') {
     echo "${G_TEST1}"
     G_TEST2 = "${G_TEST1}-${G_TEST2}"
     G_TEST3 = "${G_TEST1}.blabla.${G_TEST2}"
+    env.setProperty('ENV_VERSION', '007')
   }
   
   stage('Say Hola') {
