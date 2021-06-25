@@ -9,6 +9,10 @@ node('kube') {
   def NAMESPACE = "la-la-la-cluster"
   def K8_CONTEXT = "arn:aws:eks:${AWS_REGION}:${AWS_ACCOUNT}:cluster/${NAMESPACE}"
   
+  stage('Git Checkout') {
+    cleanWs()
+    checkout scm
+  }
   stage('Say Hello') {
     //env.setProperty('ENV_VERSION', sh(
     //  script: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD))', 
