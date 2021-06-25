@@ -14,11 +14,13 @@ node('kube') {
     checkout scm
   }
   stage('Say Hello') {
-    //env.setProperty('ENV_VERSION', sh(
-    //  script: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD))', 
-    //  returnStdout: true).trim()
-    //)
-    env.setProperty('ENV_VERSION', sh(script: 'head -n 1 VERSION', returnStdout: true).trim())      
+    env.setProperty('ENV_VERSION', 
+      sh(
+        script: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD))', 
+        returnStdout: true).trim()
+      )
+    )
+    //env.setProperty('ENV_VERSION', sh(script: 'head -n 1 VERSION', returnStdout: true).trim())      
     sh '''
       printenv | sort
     '''
