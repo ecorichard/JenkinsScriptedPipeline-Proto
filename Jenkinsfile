@@ -61,6 +61,7 @@ node('kube') {
       echo no-quotes-wcurly: ${ENV_VERSION} -- ${ENV_NAME}
       echo G_TEST3: "${ENV_VERSION}:blabla/${ENV_NAMESPACE}"
       echo "localTEST: \$localTEST"
+      echo $localTEST
     '''
   }
   
