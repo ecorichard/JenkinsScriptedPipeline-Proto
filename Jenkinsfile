@@ -14,10 +14,7 @@ node('kube') {
     //  scripts: 'echo $(head -n 1 VERSION).$(printf "%04d\n" $(git rev-list --count HEAD))', 
     //  returnStdout: true).trim()
     //)
-    env.setProperty('ENV_VERSION', sh(
-      scripts: 'head -n 1 VERSION', 
-      returnStdout: true).trim()
-    )      
+    env.setProperty('ENV_VERSION', sh(scripts: 'head -n 1 VERSION', returnStdout: true).trim())      
     sh '''
       printenv | sort
     '''
