@@ -15,7 +15,7 @@ node('kube') {
     //  returnStdout: true).trim()
     //)
     env.setProperty('ENV_VERSION', sh(
-      scripts: 'echo $(head -n 1 VERSION)', 
+      scripts: 'echo \$(head -n 1 VERSION)', 
       returnStdout: true).trim()
     )      
     sh '''
